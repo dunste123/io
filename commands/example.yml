@@ -1,0 +1,11 @@
+name: example-command
+input:
+  - name: user
+    type: USER
+    desc: who is nice?
+    required: true
+  - name: is-nice
+    type: BOOLEAN
+    desc: is the user nice?
+    required: false
+output: 'I want to do something like ${options.user.asMention} is ${options["is-nice"]?.asBoolean ?: false}'

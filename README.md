@@ -7,4 +7,4 @@
 
 
 ## Planned features
-- an easy way for non programmers to add commands through yaml files
+- an easy way for non programmers to add commands through yaml files, might just use the kotlin JSR for that LMAO
