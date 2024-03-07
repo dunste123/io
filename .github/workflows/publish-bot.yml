@@ -44,7 +44,7 @@ jobs:
         -   name: Image digest
             run: echo ${{ steps.docker_build.outputs.digest }}
 
-        -   name: Trigger dev webhook
-            uses: distributhor/workflow-webhook@v3
-            env:
-                webhook_url: ${{ secrets.WEBHOOK_URL }}
+#        -   name: Trigger dev webhook
+#            uses: distributhor/workflow-webhook@v3
+#            env:
+#                webhook_url: ${{ secrets.WEBHOOK_URL }}
