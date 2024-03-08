@@ -18,6 +18,8 @@ repositories {
 dependencies {
     implementation(libs.jda)
     implementation(libs.logger)
+    implementation(libs.jackson.core)
+    implementation(libs.jackson.yaml)
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 

@@ -1,4 +1,19 @@
+disabled: false
 name: example-command
+description: an example command
+# Input is optional
+# Type can be one of the following:
+# - SUB_COMMAND (not yet supported)
+# - SUB_COMMAND_GROUP (not yet supported)
+# - STRING
+# - INTEGER
+# - BOOLEAN
+# - USER
+# - CHANNEL
+# - ROLE
+# - MENTIONABLE (user, channel or role)
+# - NUMBER
+# - ATTACHMENT (file uploaded)
 input:
   - name: user
     type: USER
@@ -8,4 +23,6 @@ input:
     type: BOOLEAN
     desc: is the user nice?
     required: false
-output: 'I want to do something like ${options.user.asMention} is ${options["is-nice"]?.asBoolean ?: false}'
+# fancy stuff
+output: |-
+  I want to do something like ${options.user.asMention} is ${options["is-nice"]?.asBoolean ?: false}
