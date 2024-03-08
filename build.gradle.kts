@@ -19,7 +19,9 @@ dependencies {
     implementation(libs.jda)
     implementation(libs.logger)
     implementation(libs.jackson.core)
+    implementation(libs.jackson.kotlin)
     implementation(libs.jackson.yaml)
+    implementation(kotlin("scripting-jsr223")) // Dangerous stuff!!
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 

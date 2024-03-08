@@ -3,6 +3,8 @@ package me.duncte123.io
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.module.kotlin.KotlinFeature
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import me.duncte123.io.commands.JjCommand
 import me.duncte123.io.commands.ReloadCommand
 import me.duncte123.io.commands.UserCommand
@@ -17,6 +19,17 @@ import java.io.File
 class CommandManager {
     private val log = LoggerFactory.getLogger(CommandManager::class.java)
     private val jackson = ObjectMapper(YAMLFactory())
+        .registerModule(
+            KotlinModule.Builder()
+                .withReflectionCacheSize(512)
+                .configure(KotlinFeature.NullToEmptyCollection, false)
+                .configure(KotlinFeature.NullToEmptyMap, false)
+                .configure(KotlinFeature.NullIsSameAsDefault, false)
+//                .configure(KotlinFeature.SingletonSupport, SingletonSupport.DISABLED)
+                .configure(KotlinFeature.SingletonSupport, false)
+                .configure(KotlinFeature.StrictNullChecks, false)
+                .build()
+        )
         .addMixIn(OptionData::class.java, OptionDataMixin::class.java)
 
     private val commands = mutableMapOf<String, ICommand>()

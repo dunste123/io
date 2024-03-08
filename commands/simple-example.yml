@@ -1,0 +1,6 @@
+# name and description and output are required
+name: simple-command
+description: A simple example command
+# Final line of output MUST be in quotes as that is what will be returned from the bot
+output: |-
+  "Hi there! Wanna add your own commands? Submit a Pull Request on GitHub: <https://github.com/dunste123/io>"

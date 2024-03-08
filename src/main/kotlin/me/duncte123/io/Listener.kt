@@ -13,7 +13,8 @@ class Listener : EventListener {
             is ReadyEvent -> onReady(event)
             is SlashCommandInteractionEvent -> onSlashCommandInteraction(event)
             is MessageReceivedEvent -> {
-                if (event.isFromType(ChannelType.PRIVATE)) {
+                // ALWAYS IGNORE BOTS
+                if (event.isFromType(ChannelType.PRIVATE) && !event.author.isBot) {
                     event.message
                         .reply("Hey you! Wishlist jock studio now! <https://store.steampowered.com/app/2115310/Jock_Studio?utm_source=io_bot>")
                         .queue()

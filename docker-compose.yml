@@ -2,6 +2,8 @@ version: "3.7"
 services:
     io:
         container_name: io
+        volumes:
+            - './commands:/oracle-bot/commands'
         build:
             context: .
         environment:

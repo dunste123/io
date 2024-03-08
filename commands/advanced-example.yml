@@ -23,6 +23,11 @@ input:
     type: BOOLEAN
     desc: is the user nice?
     required: false
-# fancy stuff
+# Yeah, you can write full-blown kotlin here
+# That is why I will be manually reviewing each command that is added
 output: |-
-  I want to do something like ${options.user.asMention} is ${options["is-nice"]?.asBoolean ?: false}
+  import java.util.concurrent.ThreadLocalRandom
+  
+  val randomBool = ThreadLocalRandom.current().nextBoolean()
+  
+  "I want to do something like ${event.getOption("user")!!.asUser.asMention} is ${event.getOption("is-nice")?.asBoolean ?: randomBool}"

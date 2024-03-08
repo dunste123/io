@@ -14,6 +14,7 @@ dependencyResolutionManagement {
             library("logger", "ch.qos.logback", "logback-classic").version("1.4.11")
 
             library("jackson-core", "com.fasterxml.jackson.core", "jackson-core").versionRef("jackson")
+            library("jackson-kotlin", "com.fasterxml.jackson.module", "jackson-module-kotlin").versionRef("jackson")
             library("jackson-yaml", "com.fasterxml.jackson.dataformat", "jackson-dataformat-yaml").versionRef("jackson")
         }
     }
