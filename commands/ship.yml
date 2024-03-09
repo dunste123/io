@@ -51,6 +51,7 @@ output: |-
             .toString()
     ))
     .header("User-Agent", "IO (https://github.com/dunste123/io)")
+    .header("Content-Type", "application/json")
     .build()
 
   val response = HttpClient.newHttpClient()
