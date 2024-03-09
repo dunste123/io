@@ -21,7 +21,7 @@ class CommandManager {
     private val commandPool = Executors.newThreadPerTaskExecutor {
         Thread.ofVirtual()
             .name("Command-Thread")
-            .start(it)
+            .unstarted(it)
     }
     private val log = LoggerFactory.getLogger(CommandManager::class.java)
     private val jackson = ObjectMapper(YAMLFactory())
