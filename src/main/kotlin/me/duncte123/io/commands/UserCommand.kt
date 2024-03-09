@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.requests.RestAction
 import javax.script.ScriptEngine
 import javax.script.ScriptEngineManager
 import javax.script.SimpleBindings
+import kotlin.math.floor
 import kotlin.math.min
 
 private val kotlinEngine: ScriptEngine by lazy {
@@ -83,6 +84,12 @@ data class UserCommand @JsonCreator constructor (
             }
 
             is MessageEmbed -> {
+
+
+
+                val leftUser = event.getOption("user1")?.asMember!!
+                val rightUser = event.getOption("user2")?.asMember ?: event.member!!
+
                 event.hook.sendMessageEmbeds(out).queue()
             }
 

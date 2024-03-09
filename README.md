@@ -2,9 +2,10 @@
 
 (not affiliated with blits)
 
+# How do I add commands?
+If you look at the folders you can see a `commands` folder, that is where all the commands are stored!
+
+To learn how to make them we have this wiki article for you: https://github.com/dunste123/io/wiki/Creating-a-command
+
 ## How to host yourself?
 - use docker!
-
-
-## Planned features
-- an easy way for non programmers to add commands through yaml files, might just use the kotlin JSR for that LMAO

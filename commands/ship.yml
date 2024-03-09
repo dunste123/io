@@ -24,10 +24,10 @@ output: |-
           return 100
       }
   
-      return floor((firstId + secondId) / 7.0) % 100
+      return (floor((firstId + secondId) / 7.0) % 100).toInt()
   }
   
-  val leftUser = event.getOption("user1")!!.asMember
+  val leftUser = event.getOption("user1")?.asMember!!
   val rightUser = event.getOption("user2")?.asMember ?: event.member!!
   
   val score = calculateScore(leftUser.idLong, rightUser.idLong)
