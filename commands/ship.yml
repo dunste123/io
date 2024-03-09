@@ -16,7 +16,15 @@ input:
 
 output: |-
   import net.dv8tion.jda.api.EmbedBuilder
+  import net.dv8tion.jda.api.entities.Member
+  import net.dv8tion.jda.api.utils.FileUpload
+  import net.dv8tion.jda.api.utils.data.DataObject
+  import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder
   import kotlin.math.floor
+  import java.net.URI
+  import java.net.http.HttpClient
+  import java.net.http.HttpRequest
+  import java.net.http.HttpResponse.BodyHandlers
   
   // Functions first
   fun calculateScore(firstId: Long, secondId: Long): Int {
@@ -26,16 +34,40 @@ output: |-
   
       return (floor((firstId + secondId) / 7.0) % 100).toInt()
   }
+
+  fun getPfp(member: Member) = member.effectiveAvatarUrl.replace("gif", "png") + "?size=256"
   
   val leftUser = event.getOption("user1")?.asMember!!
   val rightUser = event.getOption("user2")?.asMember ?: event.member!!
   
   val score = calculateScore(leftUser.idLong, rightUser.idLong)
   
-  // TODO: fetch the image
-  
-  // Fun fact, you can return embeds as well
-  EmbedBuilder()
-    .setTitle("${leftUser.effectiveName} and ${rightUser.effectiveName}")
-    .addField("Your love score is $score%", "", false)
+  val request = HttpRequest.newBuilder()
+    .uri(URI.create("https://apis.duncte123.me/images/love"))
+    .POST(HttpRequest.BodyPublishers.ofString(
+        DataObject.empty()
+            .put("image1", getPfp(leftUser))
+            .put("image2", getPfp(rightUser))
+            .toString()
+    ))
+    .header("User-Agent", "IO (https://github.com/dunste123/io)")
     .build()
+
+  val response = HttpClient.newHttpClient()
+      .send(request, BodyHandlers.ofByteArray())
+
+  val image = response.body()
+
+  // Fun fact, you can return embeds and message data as well
+  MessageCreateBuilder()
+      .setEmbeds(
+          EmbedBuilder()
+              .setTitle("${leftUser.effectiveName} and ${rightUser.effectiveName}")
+              .addField("Your love score is $score%", "", false)
+              .setImage("attachment://result.png")
+              .build()
+      )
+      .addFiles(
+          FileUpload.fromData(image, "result.png")
+      )
+      .build()

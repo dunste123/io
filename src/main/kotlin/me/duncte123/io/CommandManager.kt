@@ -15,8 +15,14 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import org.slf4j.LoggerFactory
 import java.io.File
+import java.util.concurrent.Executors
 
 class CommandManager {
+    private val commandPool = Executors.newThreadPerTaskExecutor {
+        Thread.ofVirtual()
+            .name("Command-Thread")
+            .start(it)
+    }
     private val log = LoggerFactory.getLogger(CommandManager::class.java)
     private val jackson = ObjectMapper(YAMLFactory())
         .registerModule(
@@ -58,7 +64,13 @@ class CommandManager {
     private fun getAllCommandData() = commands.values.map { it.toCommandData() }
 
     fun handleCommand(event: SlashCommandInteractionEvent) {
-        commands[event.name]?.execute(event)
+        commandPool.submit {
+            try {
+                commands[event.name]?.execute(event)
+            } catch (e: Exception) {
+                event.hook.sendMessage("Something went wrong: $e").queue()
+            }
+        }
     }
 
     fun registerCommandsOnJda(jda: JDA) {
