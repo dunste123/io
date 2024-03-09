@@ -1,0 +1,41 @@
+# Hey there, this is a super advanced command.
+# Please look at the hello world command to learn how to make simple commands
+
+name: ship
+description: Ship two people to see how compatible they are!
+
+input:
+  - name: user1
+    type: USER
+    desc: Left side of the heart
+    required: true
+  - name: user2
+    type: USER
+    desc: Right side of the heart (will be you by default)
+    required: false
+
+output: |-
+  import net.dv8tion.jda.api.EmbedBuilder
+  import kotlin.math.floor
+  
+  // Functions first
+  fun calculateScore(firstId: Long, secondId: Long): Int {
+      if (firstId == secondId) {
+          return 100
+      }
+  
+      return floor((firstId + secondId) / 7.0) % 100
+  }
+  
+  val leftUser = event.getOption("user1")!!.asMember
+  val rightUser = event.getOption("user2")?.asMember ?: event.member!!
+  
+  val score = calculateScore(leftUser.idLong, rightUser.idLong)
+  
+  // TODO: fetch the image
+  
+  // Fun fact, you can return embeds as well
+  EmbedBuilder()
+    .setTitle("${leftUser.effectiveName} and ${rightUser.effectiveName}")
+    .addField("Your love score is $score%", "", false)
+    .build()

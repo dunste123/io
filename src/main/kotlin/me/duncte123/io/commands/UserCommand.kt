@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import me.duncte123.io.ICommand
+import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import net.dv8tion.jda.api.requests.RestAction
@@ -79,6 +80,10 @@ data class UserCommand @JsonCreator constructor (
                 }) {
                     send("Rest action error: $it")
                 }
+            }
+
+            is MessageEmbed -> {
+                event.hook.sendMessageEmbeds(out).queue()
             }
 
             else -> {
