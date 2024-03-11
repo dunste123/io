@@ -32,6 +32,11 @@ output: |-
           return 100
       }
   
+      // JJ is unshippable
+      if (firstId == 272258147169599489 || secondId == 272258147169599489) {
+          return 0
+      }
+  
       return (floor((firstId + secondId) / 7.0) % 100).toInt()
   }
 
