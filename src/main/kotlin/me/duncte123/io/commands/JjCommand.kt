@@ -41,6 +41,11 @@ class JjCommand : ICommand {
             return
         }
 
+        if (channel.idLong == event.channelIdLong) {
+            event.reply("Be sneaky and use a channel the rest can't see ;)").setEphemeral(true).queue()
+            return
+        }
+
         val msgChan = channel.asGuildMessageChannel()
 
         if (!msgChan.canTalk()) {
