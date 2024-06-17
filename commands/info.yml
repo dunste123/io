@@ -1,0 +1,15 @@
+disabled: false
+name: info
+description: get information about a subject
+input:
+  - name: about
+    type: STRING
+    desc: What would you like information about?
+    required: true
+output: |-
+  val what = event.getOption("about")!!.asString
+  
+  when(what) {
+    "js_release" -> "BLits currently has not announced a release date for the game yet. They are commited to keeping everyone updated on Kickstarter and their official website on the progress of the game.\n\nOnce BLits is confident about a release window they will announce it publicly via official platforms.\n\nPlease also understand that the game would not have been announced yet if BLits used a more 'classic' development process."
+    else -> "I don't know what that is"
+  }
