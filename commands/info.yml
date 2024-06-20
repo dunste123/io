@@ -6,6 +6,9 @@ input:
     type: STRING
     desc: What would you like information about?
     required: true
+    choices:
+      - name: "Jock Studio release information"
+        value: "js_release"
 output: |-
   val what = event.getOption("about")!!.asString
   

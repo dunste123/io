@@ -9,9 +9,11 @@ import me.duncte123.io.commands.JjCommand
 import me.duncte123.io.commands.ReloadCommand
 import me.duncte123.io.commands.UserCommand
 import me.duncte123.io.jackson.OptionDataDeserializer
+import me.duncte123.io.mixins.CommandChoiceMixin
 import me.duncte123.io.mixins.OptionDataMixin
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
+import net.dv8tion.jda.api.interactions.commands.Command
 import net.dv8tion.jda.api.interactions.commands.build.OptionData
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -36,16 +38,17 @@ class CommandManager {
                 .configure(KotlinFeature.StrictNullChecks, false)
                 .build()
         )
+        .addMixIn(Command.Choice::class.java, CommandChoiceMixin::class.java)
         .addMixIn(OptionData::class.java, OptionDataMixin::class.java)
 
     private val commands = mutableMapOf<String, ICommand>()
 
     init {
-        val module = SimpleModule()
+        // val module = SimpleModule()
 
-        module.addDeserializer(OptionData::class.java, OptionDataDeserializer())
+        // module.addDeserializer(OptionData::class.java, OptionDataDeserializer())
 
-        jackson.registerModule(module)
+        // jackson.registerModule(module)
 
         resetCommands()
     }

@@ -41,7 +41,6 @@ private val kotlinEngine: ScriptEngine by lazy {
     }
 }
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 data class UserCommand @JsonCreator constructor (
     @JsonProperty("disabled") val disabled: Boolean = false,
     @JsonProperty("name") override val name: String,
