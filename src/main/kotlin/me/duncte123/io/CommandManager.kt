@@ -1,14 +1,12 @@
 package me.duncte123.io
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import me.duncte123.io.commands.JjCommand
 import me.duncte123.io.commands.ReloadCommand
 import me.duncte123.io.commands.UserCommand
-import me.duncte123.io.jackson.OptionDataDeserializer
 import me.duncte123.io.mixins.CommandChoiceMixin
 import me.duncte123.io.mixins.OptionDataMixin
 import net.dv8tion.jda.api.JDA
