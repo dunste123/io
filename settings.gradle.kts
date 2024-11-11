@@ -7,7 +7,7 @@ rootProject.name = "io"
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            version("jda", "5.0.0-beta.20")
+            version("jda", "5.2.1")
             version("jackson", "2.16.0")
 
             library("jda", "net.dv8tion", "JDA").versionRef("jda")

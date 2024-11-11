@@ -23,6 +23,10 @@ dependencies {
     implementation(libs.jackson.yaml)
     implementation(kotlin("scripting-jsr223")) // Dangerous stuff!!
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+
+    // TODO: cleanup
+    implementation(group = "com.github.vladimir-bukhtoyarov", name = "bucket4j-core", version = "4.10.0")
+    implementation(group = "net.jodah", name = "expiringmap", version = "0.5.11")
 }
 
 tasks.test {
