@@ -2,6 +2,7 @@ package me.duncte123.io
 
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
+import net.dv8tion.jda.api.requests.GatewayIntent
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -12,6 +13,7 @@ fun main() {
 
     val jda = JDABuilder.createLight(System.getenv("BOT_TOKEN"))
         .addEventListeners(Listener())
+        .enableIntents(GatewayIntent.MESSAGE_CONTENT)
         .setActivity(Activity.customStatus("SOURCE CODE IN BIO"))
         .build()
 
