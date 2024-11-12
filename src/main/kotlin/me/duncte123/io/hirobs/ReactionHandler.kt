@@ -92,7 +92,7 @@ class ReactionHandler {
                 "head", "skateboard", "eiffeltower", "sonic screwdriver", "di-", "baseball", "Shakespeare", "studio", "diriger",
                 "husband", "charger", "Yuuto", "giacomino, guardiano delle galassie e dell'iperspazio"
             ).random() },
-            5.0,
+            10.0,
             true
         ),
         "frog" to StringReaction(
