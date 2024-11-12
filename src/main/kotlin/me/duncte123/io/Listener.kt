@@ -31,7 +31,11 @@ class Listener : EventListener {
 
     private fun onMessageReceived(event: MessageReceivedEvent) {
         // ALWAYS IGNORE BOTS
-        if (event.isFromType(ChannelType.PRIVATE) && !event.author.isBot) {
+        if (event.author.isBot) {
+            return
+        }
+
+        if (event.isFromType(ChannelType.PRIVATE)) {
             event.message
                 .reply("Hey you! Wishlist jock studio now! <https://store.steampowered.com/app/2115310/Jock_Studio?utm_source=io_bot>")
                 .queue()
