@@ -26,7 +26,8 @@ class ReactionHandler {
     private val limit = Bandwidth.simple(1, Duration.ofSeconds(300))
     private val buckets = mutableMapOf<String, Bucket>()
 
-    private val ioRegex = ":(?:[^:]+)?io[^:]+?:".toRegex()
+    private val ioRegexIgnoreEmotes = ":(?:[^:]+)?io[^:]+?:".toRegex()
+    private val ioNameRegex = "\\bio".toRegex(RegexOption.IGNORE_CASE)
 
     // if you read this, the key is used for ratelimiting
     private val reactionMap = mapOf(
@@ -68,8 +69,9 @@ class ReactionHandler {
             5.0,
             true,
             {
-                ioRegex.find(it.message.contentRaw.lowercase()) == null ||
-                        it.message.contentRaw.contains("<@!?1215363445583646750>".toRegex())
+                ioRegexIgnoreEmotes.find(it.message.contentRaw.lowercase()) == null ||
+                        it.message.contentRaw.contains("<@!?1215363445583646750>".toRegex()) ||
+                        ioNameRegex.find(it.message.contentRaw.lowercase()) != null
             }
         ),
         "oldlady" to StringReaction(
@@ -121,9 +123,9 @@ class ReactionHandler {
 
     private val channelReactions = mapOf(
         GEN_CHAT_ID to StringReaction(
-            listOf("deadchat", "dead chat", "dead server", "ded chat", "ichirudeadchat"),
+            listOf("deadchat", "dead chat", "dead server", "ded chat", "ichirudeadchat", "rip chat"),
             { randomDeadChat().replace("_", "\\_") },
-            80.0,
+            90.0,
             true,
             {
                 // check if the last message was 20+ minutes ago
