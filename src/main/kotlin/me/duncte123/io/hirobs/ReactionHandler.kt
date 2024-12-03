@@ -26,7 +26,8 @@ class ReactionHandler {
     private val limit = Bandwidth.simple(1, Duration.ofSeconds(300))
     private val buckets = mutableMapOf<String, Bucket>()
 
-    private val ioRegexIgnoreEmotes = ":(?:[^:]+)?io[^:]+?:".toRegex()
+    // TODO: re-enable this check?
+//    private val ioRegexIgnoreEmotes = ":(?:[^:]+)?io[^:]+?:".toRegex()
     private val ioNameRegex = "\\bio".toRegex(RegexOption.IGNORE_CASE)
 
     // if you read this, the key is used for ratelimiting
@@ -55,8 +56,7 @@ class ReactionHandler {
             },
             5.0,
             true,
-            {
-                    triggers, event ->
+            { triggers, event ->
                 triggers.any {
                     "\\b$it ([^<:.,]+)".toRegex(RegexOption.IGNORE_CASE)
                         .find(event.message.contentRaw) != null
@@ -66,11 +66,11 @@ class ReactionHandler {
         "io" to StringReaction(
             listOf("io", "<@1215363445583646750>", "<@!1215363445583646750>"),
             { "IO? That's me." },
-            5.0,
+            50.0,
             true,
             {
-                ioRegexIgnoreEmotes.find(it.message.contentRaw.lowercase()) == null ||
-                        it.message.contentRaw.contains("<@!?1215363445583646750>".toRegex()) ||
+                // ioRegexIgnoreEmotes.find(it.message.contentRaw.lowercase()) == null ||
+                it.message.contentRaw.contains("<@!?1215363445583646750>".toRegex()) ||
                         ioNameRegex.find(it.message.contentRaw.lowercase()) != null
             }
         ),
@@ -90,10 +90,23 @@ class ReactionHandler {
         ),
         "smh" to StringReaction(
             listOf("smh"),
-            { "smh my " + listOf(
-                "head", "skateboard", "eiffeltower", "sonic screwdriver", "di-", "baseball", "Shakespeare", "studio", "diriger",
-                "husband", "charger", "Yuuto", "giacomino, guardiano delle galassie e dell'iperspazio"
-            ).random() },
+            {
+                "smh my " + listOf(
+                    "head",
+                    "skateboard",
+                    "eiffeltower",
+                    "sonic screwdriver",
+                    "di-",
+                    "baseball",
+                    "Shakespeare",
+                    "studio",
+                    "diriger",
+                    "husband",
+                    "charger",
+                    "Yuuto",
+                    "giacomino, guardiano delle galassie e dell'iperspazio"
+                ).random()
+            },
             10.0,
             true
         ),
@@ -134,7 +147,11 @@ class ReactionHandler {
         ),
     )
 
-    private fun getChannelReaction(channelId: Long, lower: String, rand: Double): Map.Entry<String, MessageActionReaction>? {
+    private fun getChannelReaction(
+        channelId: Long,
+        lower: String,
+        rand: Double
+    ): Map.Entry<String, MessageActionReaction>? {
         if (channelId !in channelReactions) {
             return null
         }
