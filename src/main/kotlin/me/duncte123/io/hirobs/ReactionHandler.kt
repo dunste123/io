@@ -65,13 +65,33 @@ class ReactionHandler {
         ),
         "io" to StringReaction(
             listOf("io", "<@1215363445583646750>", "<@!1215363445583646750>"),
-            { "IO? That's me." },
+            {
+                listOf(
+                    "IO? That's me.",
+                    "Sorry, I did not understand that command, try saying 'hey oracle' before your command.",
+                    "Olympus University Interactive Oracle at your service!"
+                ).random()
+            },
             50.0,
             true,
             {
                 // ioRegexIgnoreEmotes.find(it.message.contentRaw.lowercase()) == null ||
                 it.message.contentRaw.contains("<@!?1215363445583646750>".toRegex()) ||
                         ioNameRegex.find(it.message.contentRaw.lowercase()) != null
+            }
+        ),
+        "hey_io_oracle" to StringReaction(
+            listOf("hey oracle", "hey io"),
+            {
+                "I'm sorry, I didn't quite understand that. Try saying 'hey oracle what can you do?' for a list of commands.\n" +
+                        "Alternatively, consult the manual in your Oracle phone for a detailed explanation.\n" +
+                        "To prevent spam, a 5 minute cooldown has been initiated."
+            },
+            100.0,
+            true,
+            {
+                it.message.contentRaw.startsWith("hey oracle", ignoreCase = true) ||
+                        it.message.contentRaw.startsWith("hey io", ignoreCase = true)
             }
         ),
         "oldlady" to StringReaction(
