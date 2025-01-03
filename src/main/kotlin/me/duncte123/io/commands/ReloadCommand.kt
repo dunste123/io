@@ -29,7 +29,7 @@ class ReloadCommand : ICommand {
     override fun toCommandData(): CommandData {
         return super.toCommandData()
             .setDefaultPermissions(
-                DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)
+                DefaultMemberPermissions.enabledFor(Permission.CREATE_GUILD_EXPRESSIONS)
             )
     }
 }
