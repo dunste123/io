@@ -54,7 +54,7 @@ class ReactionHandler {
 
                 return@RegexReaction "Hi $targetYou. I'm $self"
             },
-            5.0,
+            0.05,
             true,
             { triggers, event ->
                 triggers.any {
@@ -72,7 +72,7 @@ class ReactionHandler {
                     "Olympus University Interactive Oracle at your service!"
                 ).random()
             },
-            50.0,
+            5.0,
             true,
             {
                 // ioRegexIgnoreEmotes.find(it.message.contentRaw.lowercase()) == null ||
