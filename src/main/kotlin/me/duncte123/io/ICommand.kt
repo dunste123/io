@@ -1,6 +1,7 @@
 package me.duncte123.io
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
+import net.dv8tion.jda.api.interactions.InteractionContextType
 import net.dv8tion.jda.api.interactions.commands.build.*
 
 interface ICommand {
@@ -16,7 +17,8 @@ interface ICommand {
 
     fun toCommandData(): CommandData {
         val data = Commands.slash(name, description)
-            .setGuildOnly(true)
+            .setContexts(InteractionContextType.GUILD)
+//            .setNSFW(true)
 
         if (options.isNotEmpty()) {
             data.addOptions(options)

@@ -17,7 +17,7 @@ output: |-
   val what = event.getOption("about")!!.asString
   
   when(what) {
-    "js_release" -> "BLits currently has not announced an official release date for the game yet. They are committed to keeping everyone updated on Kickstarter and their official website on the progress of the game.\n\nOnce BLits is confident about a release window they will announce it publicly via official platforms.\n\nPlease also understand that the game would not have been announced yet if BLits used a more 'classic' development process."
+    "js_release" -> "BLits is currently expecting Jock Studio to release in 2027. **HOWEVER**, they did __***NOT***__ specify a month.\n\n**Source:** <https://www.blitsgames.com/jock-studio-development-update-20/>"
     "localisation" -> "At this time, BLits is focusing on delivering Jock Studio in English to ensure the highest quality experience for players. Given the extensive script, which spans hundreds of thousands of words, adding translations or voice acting is a complex and time-intensive process. While BLits currently has no announcements regarding translations or dubs, we’re always exploring opportunities to enhance the game for a wider audience. Should there be any updates on this front, we’ll share them on our website and social media channels."
     "android" -> "Direct quote from BLits:\n\n*As we enter 2025, our team will be working to optimize Demo 2, resolving all of the existing and new issues, and releasing an updated version during 2025 that should be in a stable state!\nWe will also be investigating both Linux and Android versions at this time too, so please stay tuned for more news on that in the new year!*"
     else -> "I don't know what that is"

@@ -1,6 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     application
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "2.2.21"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
@@ -33,7 +35,9 @@ tasks.test {
     useJUnitPlatform()
 }
 kotlin {
-    jvmToolchain(21)
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_21)
+    }
 }
 
 tasks {
@@ -41,17 +45,12 @@ tasks {
         // options.compilerArgs.add("--enable-preview")
         options.isIncremental = true
     }
-    compileKotlin {
-        kotlinOptions.jvmTarget = "21"
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "21"
-    }
 
     wrapper {
         gradleVersion = "8.5"
         distributionType = Wrapper.DistributionType.BIN
     }
+
     shadowJar {
         archiveClassifier.set("shadow")
 
